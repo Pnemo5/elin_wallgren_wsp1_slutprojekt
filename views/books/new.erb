@@ -1,0 +1,24 @@
+<h2>Läst en ny bok? Dags att lägga till!</h2>
+
+<form action="/books" method="post">
+    <label>Titel <input type="text" name="book_title" placeholder="Titel..."> </label>
+    <label>Författare <input type="text" name="book_author"> </label>
+
+
+    <label>Kategori 
+        <select name="todo_category_id">
+            <% @categories.each do |c|%>
+            <option value="<%=c['id']%>"><%=c['name']%></option>
+            <% end %>
+        </select> 
+    </label>
+
+
+
+ 
+
+
+    <label>Prio <input type="number" name="todo_priority" min="1" max="5"> </label>
+
+    <input type="submit" value="Spara">
+</form>

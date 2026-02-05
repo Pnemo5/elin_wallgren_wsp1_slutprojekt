@@ -1,0 +1,28 @@
+<h2>Alla böcker du har läst!</h2>
+
+<ul>
+    <% @books.each do |books|%>
+    <li>
+        <a href="/books/<%= books["id"]%>">
+            <%= books["title"] %>
+        </a>
+        
+        <p> <%= books["author"] %> </p>
+        <p> <%= books["genre"] %> </p>
+        <p> <%= books["pages"] %> </p>
+        <p> <%= books["rating"] %> </p>
+        <p> <%= books["date"] %> </p>
+        <p> <%= books["review"] %> </p>
+        <p> <%= books["cover"] %> </p>
+        
+
+        <form class="delete" action="/books/<%=books["id"]%>/delete" method="POST">
+            <input type="submit" value="Ta bort">
+        </form>
+        
+        <form class="edit" action="/books/<%=books["id"]%>/edit" method="get">
+            <input type="submit" value="Ändra">
+        </form>
+    </li>
+    <% end %>
+</ul>

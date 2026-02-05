@@ -5,3 +5,7 @@ body {
   font-size: x-large;
   margin: 1em;
 }
+
+p{
+  margin: 0em;
+}
