@@ -50,4 +50,36 @@ class App < Sinatra::Base
       erb(:"books/show")
     end
 
+    post '/books/:id/delete' do | id |
+      db.execute("DELETE FROM books WHERE id=?", id)
+      redirect("/books")
+    end
+
+    get '/books/:id/edit' do | id |
+      ap id
+      @book = db.execute("SELECT * FROM books WHERE id=?", id)[0]
+      p @books
+      erb(:"books/edit")
+    end
+
+    post "/books/:id/update" do | id |
+      b_title = params["book_title"]
+      b_author = params["book_author"]
+      b_genre = params["book_genre"]
+      b_pages = params["book_pages"]
+      b_rating = params["book_rating"]
+      b_date = params["book_date"]
+      b_review = params["book_review"]
+      b_cover = params["book_cover"]
+
+      db.execute("INSERT INTO books (title, author, genre, pages, rating, date, review, cover)
+      VALUES(?, ?, ?, ?, ?, ?, ?, ?)", [b_title, b_author, b_genre, b_pages, b_rating, b_date, b_review, b_cover])
+      
+
+      ap params
+
+      
+      redirect("/books")
+    end     
+
 end

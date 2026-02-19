@@ -7,13 +7,13 @@
             <%= books["title"] %>
         </a>
         
-        <p> <%= books["author"] %> </p>
-        <p> <%= books["genre"] %> </p>
-        <p> <%= books["pages"] %> </p>
-        <p> <%= books["rating"] %> </p>
-        <p> <%= books["date"] %> </p>
-        <p> <%= books["review"] %> </p>
-        <p> <%= books["cover"] %> </p>
+        <p>Författare: <%= books["author"] %> </p>
+        <p>Genre: <%= books["genre"] %> </p>
+        <p>Antal sidor: <%= books["pages"] %> </p>
+        <p>Betyg: <%= books["rating"] %> </p>
+        <p>Datum läst: <%= books["date"] %> </p>
+        <p>Recension: <%= books["review"] %> </p>
+        <p>Cover-url: <%= books["cover"] %> </p>
         
 
         <form class="delete" action="/books/<%=books["id"]%>/delete" method="POST">

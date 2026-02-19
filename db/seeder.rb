@@ -1,6 +1,6 @@
 require 'sqlite3'
 require_relative '../config'
-
+require 'bcrypt'
 class Seeder
 
   def self.seed!

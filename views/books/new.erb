@@ -4,21 +4,15 @@
     <label>Titel <input type="text" name="book_title" placeholder="Titel..."> </label>
     <label>Författare <input type="text" name="book_author"> </label>
 
+    <label>Antal sidor <input type="number" name="book_pages" min="1" max="13095"> </label>
+    <label>Betyg <input type="number" name="book_rating" min="1" max="5"> </label>
 
-    <label>Kategori 
-        <select name="todo_category_id">
-            <% @categories.each do |c|%>
-            <option value="<%=c['id']%>"><%=c['name']%></option>
-            <% end %>
-        </select> 
-    </label>
+    <label>Recension <input type="text" name="book_review"> </label>
+    <label>Omslags-url <input type="text" name="cover_url"> </label>
 
 
 
- 
 
-
-    <label>Prio <input type="number" name="todo_priority" min="1" max="5"> </label>
 
     <input type="submit" value="Spara">
 </form>
