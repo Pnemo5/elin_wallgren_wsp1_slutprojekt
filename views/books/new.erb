@@ -4,15 +4,21 @@
     <label>Titel <input type="text" name="book_title" placeholder="Titel..."> </label>
     <label>Författare <input type="text" name="book_author"> </label>
 
+<label>Genrer</label>
+
+<select name="genre_ids[]" multiple size="8">
+  <% @genres.each do |genre| %>
+    <option value="<%= genre['id'] %>">
+      <%= genre['name'] %>
+    </option>
+  <% end %>
+</select>
+
     <label>Antal sidor <input type="number" name="book_pages" min="1" max="13095"> </label>
     <label>Betyg <input type="number" name="book_rating" min="1" max="5"> </label>
 
     <label>Recension <input type="text" name="book_review"> </label>
     <label>Omslags-url <input type="text" name="cover_url"> </label>
-
-
-
-
 
     <input type="submit" value="Spara">
 </form>
