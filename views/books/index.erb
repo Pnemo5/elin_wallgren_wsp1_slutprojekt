@@ -8,12 +8,12 @@
         </a>
         
         <p>Författare: <%= books["author"] %> </p>
-        <p>Genre: <%= books["genre"] %> </p>
         <p>Antal sidor: <%= books["pages"] %> </p>
         <p>Betyg: <%= books["rating"] %> </p>
         <p>Datum läst: <%= books["date"] %> </p>
         <p>Recension: <%= books["review"] %> </p>
         <p>Cover-url: <%= books["cover"] %> </p>
+        <p>Genrer: <%= %> </p>
         
 
         <form class="delete" action="/books/<%=books["id"]%>/delete" method="POST">
@@ -25,8 +25,6 @@
         </form>
     </li>
 
-    <p><%= @books_genres[1] %> </p>
-    <p><%= @books_genres[2] %> </p>
 
 
 

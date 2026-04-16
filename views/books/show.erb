@@ -7,6 +7,11 @@
     <p>Datum läst: <%=@books["date"] %> </p>
     <p>Recension: <%=@books["review"] %> </p>
     <p>URL-länk: <%=@books["cover"] %> </p>
+    
+    <p>Genrer:</p>
+    <% @genres.each do |genre|%>
+    <p><%=genre["name"] %></p>
+    <% end %>
 
 
 
