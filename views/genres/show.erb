@@ -1,0 +1,12 @@
+ <h2>Din genre: <%=@genres['name']%> </h2>
+
+    <p>Namn: <%=@genres["name"] %> </p>
+    <p>Beskrivning: <%=@genres["description"] %> </p>
+
+    <form class="delete" action="/genres/<%=@genres["id"]%>/delete" method="post">
+        <input type="submit" value="Ta bort">
+    </form>
+    
+    <form class="edit" action="/genres/<%=@genres["id"]%>/edit" method="post">
+        <input type="submit" value="Ändra">
+    </form>

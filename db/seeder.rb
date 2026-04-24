@@ -18,6 +18,7 @@ class Seeder
     db.execute('DROP TABLE IF EXISTS books')
     db.execute('DROP TABLE IF EXISTS genres')
     db.execute('DROP TABLE IF EXISTS books_genres')
+    db.execute('DROP TABLE IF EXISTS users')
 
   end
 
@@ -41,11 +42,16 @@ class Seeder
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 book_id INTEGER,
                 genre_id INTEGER)')
+    db.execute('CREATE TABLE users (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT,
+                password TEXT)')
   end
 
   def self.populate_tables
     db.execute('INSERT INTO books (title, author, pages, rating, date, review, cover) VALUES ("The Song of Achilles", "Madeline Miller", 408, 5, "januari", "SMÄRTA", "URL")')
     
+
     db.execute('INSERT INTO genres (name, description) VALUES ("Romantik", "")')
     db.execute('INSERT INTO genres (name, description) VALUES ("Deckare", "")')
     db.execute('INSERT INTO genres (name, description) VALUES ("Fantasy", "")')
@@ -76,8 +82,12 @@ class Seeder
     db.execute('INSERT INTO genres (name, description) VALUES ("Politisk", "")')
     db.execute('INSERT INTO genres (name, description) VALUES ("Arbetarlitteratur", "")')
 
+
     db.execute('INSERT INTO books_genres (book_id, genre_id) VALUES (1, 3)')
     db.execute('INSERT INTO books_genres (book_id, genre_id) VALUES (2, 3)')
+
+    password_hashed = BCrypt::Password.create("123")
+    db.execute('INSERT INTO users (username, password) VALUES ("Elin", ?)', [password_hashed])
 
     
   end

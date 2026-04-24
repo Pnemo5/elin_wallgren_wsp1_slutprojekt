@@ -6,5 +6,21 @@ class User
       db
     end
   end
+
+  def self.all()
+    return db.execute("SELECT username FROM users")
+  end
+
+
+  def self.post(data)
+    db.execute(
+      "INSERT INTO users (username, password)
+       VALUES (?, ?)",
+      [
+        data["username"],
+        data["password"],
+      ]
+    )
+  end
   
 end

@@ -1,0 +1,12 @@
+<h2>Alla användare på hemsidan!</h2>
+
+<ul>
+    <% @users.each do |users|%>
+    <li>
+        <a href="/users/<%= users["id"]%>">
+            <%= users["username"] %>
+        </a>
+    </li>
+
+    <% end %>
+</ul>

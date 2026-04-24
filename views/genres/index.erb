@@ -1,0 +1,29 @@
+<h2>Alla genrer du har!</h2>
+
+    <a href="/genres/new">Lägg till en genre!</a>
+
+<ul>
+    <% @genres.each do |genres|%>
+    <li>
+        <a href="/genres/<%= genres["id"]%>">
+            <%= genres["name"] %>
+        </a>
+        
+        <p>Genre: <%= genres["name"] %> </p>
+        <p>Beskrivning: <%= genres["description"] %> </p>
+        
+
+        <form class="delete" action="/genres/<%= genres["id"]%>/delete" method="POST">
+            <input type="submit" value="Ta bort">
+        </form>
+        
+        <form class="edit" action="/genres/<%=genres["id"]%>/edit" method="get">
+            <input type="submit" value="Ändra">
+        </form>
+    </li>
+
+
+
+
+    <% end %>
+</ul>
