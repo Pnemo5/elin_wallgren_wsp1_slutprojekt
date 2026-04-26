@@ -1,29 +1,33 @@
+<li><a href="/books">Dina böcker</a></li>
+<li><a href="/books/new">Ny bok</a></li>
+<li><a href="/genres">Dina genrer</a></li>
+<li><a href="/users">Hitta andra användare</a></li>
+
 <h2>Alla genrer du har!</h2>
 
     <a href="/genres/new">Lägg till en genre!</a>
 
 <ul>
-    <% @genres.each do |genres|%>
-    <li>
-        <a href="/genres/<%= genres["id"]%>">
-            <%= genres["name"] %>
-        </a>
-        
-        <p>Genre: <%= genres["name"] %> </p>
-        <p>Beskrivning: <%= genres["description"] %> </p>
-        
+<% @genres.each do |genre| %>
+  <li>
+    <a href="/genres/<%= genre["id"] %>">
+      <%= genre["name"] %>
+    </a>
 
-        <form class="delete" action="/genres/<%= genres["id"]%>/delete" method="POST">
-            <input type="submit" value="Ta bort">
-        </form>
-        
-        <form class="edit" action="/genres/<%=genres["id"]%>/edit" method="get">
-            <input type="submit" value="Ändra">
-        </form>
-    </li>
+    <p>Genre: <%= genre["name"] %></p>
+    <p>Beskrivning: <%= genre["description"] %></p>
 
+    <% if genre["user_id"].to_i == session[:user_id].to_i %>
 
+      <form class="delete" action="/genres/<%= genre["id"] %>/delete" method="post">
+        <input type="submit" value="Ta bort">
+      </form>
 
+      <form class="edit" action="/genres/<%= genre["id"] %>/edit" method="get">
+        <input type="submit" value="Ändra">
+      </form>
 
     <% end %>
+  </li>
+<% end %>
 </ul>

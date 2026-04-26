@@ -1,11 +1,32 @@
-<form action="/books" method="post">
-    <label>Titel <input type="text" name="book_title" value=<%= @book["title"]%>> </label>
-    <label>Författare <input type="text" name="book_author" value=<%= @book["author"]%>> </label>
+<li><a href="/books">Dina böcker</a></li>
+<li><a href="/books/new">Ny bok</a></li>
+<li><a href="/genres">Dina genrer</a></li>
+<li><a href="/users">Hitta andra användare</a></li>
 
-    <label>Antal sidor <input type="number" name="book_pages" min="1" max="13095" value=<%= @book["pages"]%>> </label>
-    <label>Betyg <input type="number" name="book_rating" min="1" max="5" value=<%= @book["rating"]%>> </label>
+<form action="/books/<%= @book["id"] %>/update" method="post">
+    <label>Titel <input type="text" name="book_title" value="<%= @book["title"] %>"> </label>
 
-    <label>Recension <input type="text" name="book_review" value=<%= @book["review"]%>> </label>
-    <label>Omslags-url <input type="text" name="cover_url" value=<%= @book["cover"]%>> </label>
+    <label>Författare <input type="text" name="book_author" value="<%= @book["author"] %>"> </label>
+
+    <label>Genrer</label>
+
+    <select name="genre_ids[]" multiple size="8">
+    <% @genres.each do |genre| %>
+
+        <% selected = @book_genres.any? { |g| g["id"].to_i == genre["id"].to_i } %>
+
+        <option value="<%= genre['id'] %>" <%= "selected" if selected %>>
+        <%= genre['name'] %>
+        </option>
+
+    <% end %>
+    </select>
+
+    <label>Antal sidor <input type="number" name="book_pages" min="1" max="13095" value="<%= @book["pages"] %>"> </label>
+
+    <label>Betyg <input type="number" name="book_rating" min="1" max="5" value="<%= @book["rating"] %>"> </label>
+
+    <label>Recension <input type="text" name="book_review" value="<%= @book["review"] %>"> </label>
+
     <input type="submit" value="Spara">
 </form>

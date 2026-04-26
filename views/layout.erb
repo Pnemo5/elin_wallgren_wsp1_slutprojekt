@@ -7,21 +7,24 @@
     <link rel="stylesheet" type="text/css" href="/style.css?<%=Time.now.to_i%>">
 </head>
 <body>
-  <header>
-    <h1>Alla dina böcker!</h1>
-  </header>
-  <hr>
-  <nav>
-    <ul>
-      <li><a href="/books">Alla dina böcker</a></li>
-      <li><a href="/books/new">Ny bok</a></li>
-      <li><a href="/genres">Dina genrer</a></li>
-      <li><a href="/users">Hitta andra användare</a></li>
+  <div id="login-info">
+    <% if @current_user %>
+      <span>Inloggad som: <%= @current_user['username'] %></span>
+    <% else %>
+      <span>Ej inloggad</span>
+    <% end %>
+  </div>
+
+  <% if @current_user %>
+    <form class="delete" action="/logout" method="post">
+      <input type="submit" value="Logga ut">
+    </form>
+
+  <% end %>
 
 
-    </ul>
-  </nav>
-  <hr>
+
+
   <%= yield %>
   <hr>
 </body>

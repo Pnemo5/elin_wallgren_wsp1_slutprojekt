@@ -1,12 +1,23 @@
+<li><a href="/books">Dina böcker</a></li>
+<li><a href="/books/new">Ny bok</a></li>
+<li><a href="/genres">Dina genrer</a></li>
+<li><a href="/users">Hitta andra användare</a></li>
+
+
+ 
  <h2>Din genre: <%=@genres['name']%> </h2>
 
     <p>Namn: <%=@genres["name"] %> </p>
     <p>Beskrivning: <%=@genres["description"] %> </p>
 
-    <form class="delete" action="/genres/<%=@genres["id"]%>/delete" method="post">
-        <input type="submit" value="Ta bort">
-    </form>
-    
-    <form class="edit" action="/genres/<%=@genres["id"]%>/edit" method="post">
-        <input type="submit" value="Ändra">
-    </form>
+    <% if @can_edit %>
+
+  <form class="delete" action="/genres/<%= @genres["id"] %>/delete" method="post">
+    <input type="submit" value="Ta bort">
+  </form>
+
+  <form class="edit" action="/genres/<%= @genres["id"] %>/edit" method="get">
+    <input type="submit" value="Ändra">
+  </form>
+
+<% end %>

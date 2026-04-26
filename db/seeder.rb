@@ -19,6 +19,8 @@ class Seeder
     db.execute('DROP TABLE IF EXISTS genres')
     db.execute('DROP TABLE IF EXISTS books_genres')
     db.execute('DROP TABLE IF EXISTS users')
+    db.execute('DROP TABLE IF EXISTS login_attempts')
+
 
   end
 
@@ -31,76 +33,84 @@ class Seeder
                 rating INTEGER,
                 date TEXT,
                 review TEXT,
-                cover TEXT)')
+                cover TEXT,
+                user_id INTEGER)')
 
     db.execute('CREATE TABLE genres (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT,
-                description TEXT)')
+                description TEXT,
+                user_id INTEGER)')
 
     db.execute('CREATE TABLE books_genres (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 book_id INTEGER,
-                genre_id INTEGER)')
+                genre_id INTEGER,
+                FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE,
+                FOREIGN KEY (genre_id) REFERENCES genres(id) ON DELETE CASCADE)')
+
     db.execute('CREATE TABLE users (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 username TEXT,
-                password TEXT)')
+                password TEXT,
+                admin INTEGER DEFAULT 0)')
+
+    db.execute('CREATE TABLE login_attempts (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                username TEXT,
+                ip_address TEXT,
+                success INTEGER,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP)');
   end
 
   def self.populate_tables
-    db.execute('INSERT INTO books (title, author, pages, rating, date, review, cover) VALUES ("The Song of Achilles", "Madeline Miller", 408, 5, "januari", "SMÄRTA", "URL")')
+    db.execute('INSERT INTO books (title, author, pages, rating, date, review, cover, user_id) VALUES ("The Song of Achilles", "Madeline Miller", 408, 5, "januari", "SMÄRTA", "URL", 1)')
     
 
-    db.execute('INSERT INTO genres (name, description) VALUES ("Romantik", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Deckare", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Fantasy", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Sci-fi", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Young adult", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Historisk fiktion", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Biografi", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Manga", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Serietidning", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Grafisk bok", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Barnbok", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Feel-good", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Skräck", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Spänning", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Samtida skönlitteratur", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Äventyr", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Matlagning", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Allegori", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Roman", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Klassiker", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Komedi", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Coming-of-age", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Feministisk", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Dystopi", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Postapokalyptisk", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("HBTQI+", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Mysterie", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Politisk", "")')
-    db.execute('INSERT INTO genres (name, description) VALUES ("Arbetarlitteratur", "")')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Romantik", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Deckare", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Fantasy", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Sci-fi", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Young adult", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Historisk fiktion", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Biografi", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Manga", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Serietidning", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Grafisk bok", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Barnbok", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Feel-good", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Skräck", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Spänning", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Samtida skönlitteratur", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Äventyr", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Matlagning", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Allegori", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Roman", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Klassiker", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Komedi", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Coming-of-age", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Feministisk", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Dystopi", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Postapokalyptisk", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("HBTQI+", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Mysterie", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Politisk", "", NULL)')
+    db.execute('INSERT INTO genres (name, description, user_id) VALUES ("Arbetarlitteratur", "", NULL)')
 
 
     db.execute('INSERT INTO books_genres (book_id, genre_id) VALUES (1, 3)')
     db.execute('INSERT INTO books_genres (book_id, genre_id) VALUES (2, 3)')
 
     password_hashed = BCrypt::Password.create("123")
-    db.execute('INSERT INTO users (username, password) VALUES ("Elin", ?)', [password_hashed])
+    password_hashed2 = BCrypt::Password.create("321")
+    db.execute('INSERT INTO users (username, password, admin) VALUES (?, ?, ?)',["Elin", password_hashed, 1])
+    db.execute('INSERT INTO users (username, password, admin) VALUES (?, ?, ?)',["Testis Festis", password_hashed2, 0])
 
     
   end
 
   private
 
-  def self.db
-    @db ||= begin
-      db = SQLite3::Database.new('db/books.sqlite.db')
-      db.results_as_hash = true
-      db
-    end
-  end
 
   def self.db
     @db ||= begin

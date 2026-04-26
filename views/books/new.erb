@@ -1,3 +1,8 @@
+<li><a href="/books">Dina böcker</a></li>
+<li><a href="/books/new">Ny bok</a></li>
+<li><a href="/genres">Dina genrer</a></li>
+<li><a href="/users">Hitta andra användare</a></li>
+
 <h2>Läst en ny bok? Dags att lägga till!</h2>
 
 <form action="/books" method="post">
@@ -18,7 +23,6 @@
     <label>Betyg <input type="number" name="book_rating" min="1" max="5"> </label>
 
     <label>Recension <input type="text" name="book_review"> </label>
-    <label>Omslags-url <input type="text" name="cover_url"> </label>
 
     <input type="submit" value="Spara">
 </form>

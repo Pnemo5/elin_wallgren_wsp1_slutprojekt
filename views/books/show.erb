@@ -1,12 +1,15 @@
- <h2>Din Bok: <%=@books['title']%> </h2>
+<li><a href="/books">Dina böcker</a></li>
+<li><a href="/books/new">Ny bok</a></li>
+<li><a href="/genres">Dina genrer</a></li>
+<li><a href="/users">Hitta andra användare</a></li>
+ 
+ <h2>Din Bok: <%=@book['title']%> </h2>
 
-    <p>Författare: <%=@books["author"] %> </p>
-    <p> <%=@books["genres"] %> </p>
-    <p>Antal sidor: <%=@books["pages"] %> </p>
-    <p>Betyg: <%=@books["rating"] %> /5 stjärnor </p>
-    <p>Datum läst: <%=@books["date"] %> </p>
-    <p>Recension: <%=@books["review"] %> </p>
-    <p>URL-länk: <%=@books["cover"] %> </p>
+    <p>Författare: <%=@book["author"] %> </p>
+    <p> <%=@book["genres"] %> </p>
+    <p>Antal sidor: <%=@book["pages"] %> </p>
+    <p>Betyg: <%=@book["rating"] %> /5 stjärnor </p>
+    <p>Recension: <%=@book["review"] %> </p>
     
     <p>Genrer:</p>
     <% @genres.each do |genre|%>
@@ -18,10 +21,10 @@
 
 
 
-    <form class="delete" action="/books/<%=@books["id"]%>/delete" method="post">
+    <form class="delete" action="/books/<%=@book["id"]%>/delete" method="post">
         <input type="submit" value="Ta bort">
     </form>
     
-    <form class="edit" action="/books/<%=@books["id"]%>/edit" method="post">
+    <form class="edit" action="/books/<%=@book["id"]%>/edit" method="get">
         <input type="submit" value="Ändra">
     </form>

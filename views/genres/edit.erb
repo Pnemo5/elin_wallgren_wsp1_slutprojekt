@@ -1,6 +1,12 @@
-<form action="/genres" method="post">
-    <label>Namn <input type="text" name="genre_name" value=<%= @genres["name"]%>> </label>
-    <label>Beskrivning <input type="text" name="genre_description" value=<%= @genres["description"]%>> </label>
+<li><a href="/books">Dina böcker</a></li>
+<li><a href="/books/new">Ny bok</a></li>
+<li><a href="/genres">Dina genrer</a></li>
+<li><a href="/users">Hitta andra användare</a></li>
+
+<form action="/genres/<%= @genres["id"] %>/update" method="post">
+    <label>Namn <input type="text" name="genre_name" value="<%= @genres["name"] %>"> </label>
+
+    <label>Beskrivning <input type="text" name="genre_description" value="<%= @genres["description"] %>"> </label>
 
     <input type="submit" value="Spara">
 </form>

@@ -1,3 +1,8 @@
+<li><a href="/books">Dina böcker</a></li>
+<li><a href="/books/new">Ny bok</a></li>
+<li><a href="/genres">Dina genrer</a></li>
+<li><a href="/users">Hitta andra användare</a></li>
+
 <h2>Alla böcker du har läst!</h2>
 
 <ul>
@@ -8,12 +13,7 @@
         </a>
         
         <p>Författare: <%= books["author"] %> </p>
-        <p>Antal sidor: <%= books["pages"] %> </p>
         <p>Betyg: <%= books["rating"] %> </p>
-        <p>Datum läst: <%= books["date"] %> </p>
-        <p>Recension: <%= books["review"] %> </p>
-        <p>Cover-url: <%= books["cover"] %> </p>
-        <p>Genrer: <%= %> </p>
         
 
         <form class="delete" action="/books/<%=books["id"]%>/delete" method="POST">
